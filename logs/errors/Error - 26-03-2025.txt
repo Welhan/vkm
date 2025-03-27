@@ -1,0 +1,312 @@
+[14:23:08] Player abangku999 not found in top_league di row 31 
+[14:23:15] Player abuy not found in top_league di row 65 
+[14:23:39] Player tirlen55 not found in top_league di row 166 
+[14:23:58] Player albinoinova not found in top_league di row 250 
+[14:24:01] Player aldrian1507 not found in top_league di row 265 
+[14:24:03] Player xolyn12 not found in top_league di row 276 
+[14:24:06] Player alfiannurr not found in top_league di row 289 
+[14:24:25] Player ancik194 not found in top_league di row 381 
+[14:24:26] Player jolran13 not found in top_league di row 384 
+[14:24:36] Player anita28 not found in top_league di row 430 
+[14:24:42] Player apr-42 not found in top_league di row 461 
+[14:24:42] Player apr-77 not found in top_league di row 462 
+[14:25:08] Player asgo666 not found in top_league di row 579 
+[14:25:23] Player ayolah69 not found in top_league di row 650 
+[14:25:45] Player bandit2291 not found in top_league di row 749 
+[14:26:05] Player bedugzt04 not found in top_league di row 842 
+[14:26:07] Player zonix82 not found in top_league di row 852 
+[14:26:15] Player bey2109 not found in top_league di row 889 
+[14:26:31] Player vixan88 not found in top_league di row 960 
+[14:26:47] Player botoll12 not found in top_league di row 1023 
+[14:26:50] Player braders not found in top_league di row 1037 
+[14:26:52] Player brewekjos not found in top_league di row 1045 
+[14:27:55] Player danamul77 not found in top_league di row 1305 
+[14:28:07] Player davio12 not found in top_league di row 1358 
+[14:28:15] Player dedyarya not found in top_league di row 1388 
+[14:28:31] Player dewapratama1 not found in top_league di row 1442 
+[14:29:33] Player ega364 not found in top_league di row 1614 
+[14:29:33] Player lynkar72 not found in top_league di row 1617 
+[14:29:35] Player ekoaprianto not found in top_league di row 1624 
+[14:29:37] Player eltozzo not found in top_league di row 1635 
+[14:30:07] Player fathan12 not found in top_league di row 1758 
+[14:30:43] Player genk666 not found in top_league di row 1921 
+[14:30:44] Player gering45 not found in top_league di row 1927 
+[14:31:01] Player grebelin not found in top_league di row 1998 
+[14:31:04] Player gudalmuu not found in top_league di row 2008 
+[14:31:46] Player ibnutai not found in top_league di row 2196 
+[14:31:53] Player igo12345 not found in top_league di row 2223 
+[14:32:07] Player ipunkjie not found in top_league di row 2286 
+[14:32:25] Player jagung87 not found in top_league di row 2361 
+[14:32:29] Player jamrod not found in top_league di row 2380 
+[14:34:37] Player lexus221 not found in top_league di row 2917 
+[14:34:46] Player loswardi not found in top_league di row 2952 
+[14:35:05] Player maloy21 not found in top_league di row 3027 
+[14:35:15] Player marfel12 not found in top_league di row 3068 
+[14:35:27] Player zavon77 not found in top_league di row 3117 
+[14:36:16] Player muyaksir not found in top_league di row 3329 
+[14:36:17] Player mymek not found in top_league di row 3334 
+[14:36:47] Player nurhini not found in top_league di row 3467 
+[14:37:02] Player omu122 not found in top_league di row 3526 
+[14:37:20] Player paketu13 not found in top_league di row 3598 
+[14:37:38] Player pembawakeber not found in top_league di row 3679 
+[14:37:40] Player pengky18 not found in top_league di row 3689 
+[14:37:47] Player pian900 not found in top_league di row 3718 
+[14:38:03] Player prenjak not found in top_league di row 3784 
+[14:38:10] Player puspus1 not found in top_league di row 3817 
+[14:38:30] Player rama420 not found in top_league di row 3904 
+[14:39:06] Player riko2403 not found in top_league di row 4060 
+[14:39:08] Player talon22 not found in top_league di row 4071 
+[14:39:16] Player rizki14045 not found in top_league di row 4102 
+[14:39:36] Player rudiat95 not found in top_league di row 4192 
+[14:40:18] Player seldiyanto not found in top_league di row 4374 
+[14:40:22] Player senirah not found in top_league di row 4389 
+[14:40:30] Player shintaputri not found in top_league di row 4427 
+[14:40:43] Player sistem999 not found in top_league di row 4482 
+[14:41:03] Player subhan777 not found in top_league di row 4561 
+[14:41:09] Player kavin68 not found in top_league di row 4585 
+[14:41:44] Player theo27 not found in top_league di row 4733 
+[14:41:49] Player tino1234 not found in top_league di row 4753 
+[14:41:57] Player topan765 not found in top_league di row 4787 
+[14:42:05] Player tutik not found in top_league di row 4821 
+[14:42:59] Player wgsuperr77 not found in top_league di row 5039 
+[14:43:33] Player yudi121288 not found in top_league di row 5179 
+[14:43:52] Player varos12 not found in top_league di row 5253 
+[14:43:52] Player zyther33 not found in top_league di row 5254 
+[14:43:52] Player valos69 not found in top_league di row 5255 
+[14:43:53] Player torvix45 not found in top_league di row 5256 
+[14:43:53] Player kriva89 not found in top_league di row 5257 
+[14:43:53] Player tirael22 not found in top_league di row 5258 
+[14:43:53] Player lyvin30 not found in top_league di row 5261 
+[14:43:54] Player mavon66 not found in top_league di row 5262 
+[14:43:54] Player xylog23 not found in top_league di row 5263 
+[14:43:54] Player tiryn88 not found in top_league di row 5264 
+[14:43:54] Player vorlan67 not found in top_league di row 5265 
+[14:43:54] Player zerith44 not found in top_league di row 5266 
+[14:43:55] Player lorvex81 not found in top_league di row 5268 
+[14:43:55] Player meltra47 not found in top_league di row 5270 
+[14:43:55] Player rynor30 not found in top_league di row 5271 
+[14:43:56] Player feryn62 not found in top_league di row 5272 
+[14:43:56] Player grylon94 not found in top_league di row 5274 
+[14:43:56] Player zyrok15 not found in top_league di row 5276 
+[14:43:57] Player baxyn47 not found in top_league di row 5278 
+[14:43:58] Player xavol61 not found in top_league di row 5281 
+[14:43:58] Player talyra33 not found in top_league di row 5282 
+[14:43:59] Player fexon91 not found in top_league di row 5285 
+[14:43:59] Player kernix44 not found in top_league di row 5288 
+[14:44:00] Player alora99 not found in top_league di row 5290 
+[14:44:00] Player vyxor24 not found in top_league di row 5293 
+[14:44:01] Player korun22 not found in top_league di row 5296 
+[14:44:02] Player corlin49 not found in top_league di row 5299 
+[14:44:02] Player jivon76 not found in top_league di row 5300 
+[14:44:02] Player ferin28 not found in top_league di row 5301 
+[14:44:02] Player falyn69 not found in top_league di row 5303 
+[14:44:03] Player kioran26 not found in top_league di row 5304 
+[14:44:03] Player tyrin57 not found in top_league di row 5305 
+[14:44:03] Player virok28 not found in top_league di row 5308 
+[14:44:04] Player lynar89 not found in top_league di row 5309 
+[14:44:04] Player kylar39 not found in top_league di row 5312 
+[14:44:05] Player maron51 not found in top_league di row 5313 
+[14:44:05] Player tormik23 not found in top_league di row 5314 
+[14:44:05] Player talvyn11 not found in top_league di row 5315 
+[14:44:07] Player fauzanh88 not found in top_league di row 5323 
+[14:44:07] Player rizkyxp77 not found in top_league di row 5324 
+[14:44:07] Player dananglh66 not found in top_league di row 5325 
+[14:44:07] Player ardiq99 not found in top_league di row 5326 
+[14:44:07] Player gilangpz78 not found in top_league di row 5327 
+[14:44:08] Player ahmadsp45 not found in top_league di row 5328 
+[14:44:08] Player akhmadqp23 not found in top_league di row 5329 
+[14:44:08] Player faisalhx66 not found in top_league di row 5330 
+[14:44:08] Player rendrap99 not found in top_league di row 5331 
+[14:44:09] Player bayuqp45 not found in top_league di row 5333 
+[14:44:09] Player yusufpx66 not found in top_league di row 5335 
+[14:44:09] Player rezalp99 not found in top_league di row 5336 
+[14:44:10] Player herlandqx45 not found in top_league di row 5338 
+[14:44:10] Player fikrimz23 not found in top_league di row 5339 
+[14:44:10] Player alifhx66 not found in top_league di row 5340 
+[14:44:10] Player evandop99 not found in top_league di row 5341 
+[14:44:10] Player hasanlp78 not found in top_league di row 5342 
+[14:44:11] Player zulkhix45 not found in top_league di row 5343 
+[14:44:11] Player ilyasfq23 not found in top_league di row 5344 
+[14:44:11] Player syahruzpx66 not found in top_league di row 5345 
+[14:44:11] Player hilmiqh99 not found in top_league di row 5346 
+[14:44:12] Player danuarhx45 not found in top_league di row 5348 
+[14:44:12] Player andrianqp23 not found in top_league di row 5349 
+[14:44:12] Player bobbyslx66 not found in top_league di row 5350 
+[14:44:13] Player akhmadkp78 not found in top_league di row 5352 
+[14:44:13] Player sulistianq45 not found in top_league di row 5353 
+[14:44:13] Player fadhliapx23 not found in top_league di row 5354 
+[14:44:13] Player anggoroqh66 not found in top_league di row 5355 
+[14:44:13] Player harvinsp99 not found in top_league di row 5356 
+[14:44:14] Player zihannn33 not found in top_league di row 5357 
+[14:44:14] Player raditylh45 not found in top_league di row 5358 
+[14:44:14] Player dilanomq23 not found in top_league di row 5359 
+[14:44:15] Player anggrakp78 not found in top_league di row 5362 
+[14:44:16] Player bimaslx45 not found in top_league di row 5363 
+[14:44:16] Player wiworpq23 not found in top_league di row 5364 
+[14:44:17] Player syahrulqp78 not found in top_league di row 5367 
+[14:44:17] Player ferykpx45 not found in top_league di row 5368 
+[14:44:17] Player gilangmh23 not found in top_league di row 5369 
+[14:44:17] Player wahyuhx66 not found in top_league di row 5370 
+[14:44:18] Player ilhamdp99 not found in top_league di row 5371 
+[14:44:18] Player yusrilhp78 not found in top_league di row 5372 
+[14:47:46] Player tino1234 not found in top_gamer 
+[14:47:51] Player bedugzt04 not found in top_gamer 
+[14:47:52] Player rizki14045 not found in top_gamer 
+[14:47:54] Player dedyarya not found in top_gamer 
+[14:47:57] Player apr-77 not found in top_gamer 
+[14:48:16] Player ega364 not found in top_gamer 
+[14:48:24] Player seldiyanto not found in top_gamer 
+[14:48:28] Player pian900 not found in top_gamer 
+[14:48:55] Player lexus221 not found in top_gamer 
+[14:49:13] Player tutik not found in top_gamer 
+[14:49:14] Player maloy21 not found in top_gamer 
+[14:49:20] Player asgo666 not found in top_gamer 
+[14:49:42] Player paketu13 not found in top_gamer 
+[14:50:02] Player aldrian1507 not found in top_gamer 
+[14:50:03] Player ekoaprianto not found in top_gamer 
+[14:50:14] Player braders not found in top_gamer 
+[14:50:20] Player loswardi not found in top_gamer 
+[14:50:25] Player alfiannurr not found in top_gamer 
+[14:50:40] Player rama420 not found in top_gamer 
+[14:50:53] Player abangku999 not found in top_gamer 
+[14:51:02] Player igo12345 not found in top_gamer 
+[14:51:13] Player dewapratama1 not found in top_gamer 
+[14:51:37] Player bandit2291 not found in top_gamer 
+[14:51:38] Player bey2109 not found in top_gamer 
+[14:51:41] Player ayolah69 not found in top_gamer 
+[14:51:50] Player albinoinova not found in top_gamer 
+[14:51:53] Player omu122 not found in top_gamer 
+[14:52:04] Player gudalmuu not found in top_gamer 
+[14:52:06] Player danamul77 not found in top_gamer 
+[14:52:08] Player muyaksir not found in top_gamer 
+[14:52:10] Player theo27 not found in top_gamer 
+[14:52:11] Player mymek not found in top_gamer 
+[14:52:27] Player pembawakeber not found in top_gamer 
+[14:52:33] Player riko2403 not found in top_gamer 
+[14:52:35] Player ibnutai not found in top_gamer 
+[14:52:43] Player genk666 not found in top_gamer 
+[14:52:56] Player jamrod not found in top_gamer 
+[14:52:58] Player prenjak not found in top_gamer 
+[14:53:14] Player subhan777 not found in top_gamer 
+[14:53:19] Player wgsuperr77 not found in top_gamer 
+[14:53:20] Player yudi121288 not found in top_gamer 
+[14:53:29] Player ancik194 not found in top_gamer 
+[14:53:34] Player senirah not found in top_gamer 
+[14:53:38] Player pengky18 not found in top_gamer 
+[14:53:47] Player apr-42 not found in top_gamer 
+[14:53:50] Player anita28 not found in top_gamer 
+[14:54:00] Player ipunkjie not found in top_gamer 
+[14:54:35] Player nurhini not found in top_gamer 
+[14:54:44] Player eltozzo not found in top_gamer 
+[14:54:45] Player gering45 not found in top_gamer 
+[14:54:46] Player botoll12 not found in top_gamer 
+[14:54:48] Player brewekjos not found in top_gamer 
+[14:54:54] Player davio12 not found in top_gamer 
+[14:54:56] Player shintaputri not found in top_gamer 
+[14:54:58] Player sistem999 not found in top_gamer 
+[14:55:05] Player rudiat95 not found in top_gamer 
+[14:55:18] Player puspus1 not found in top_gamer 
+[14:55:23] Player marfel12 not found in top_gamer 
+[14:55:26] Player abuy not found in top_gamer 
+[14:55:30] Player jagung87 not found in top_gamer 
+[14:55:54] Player topan765 not found in top_gamer 
+[14:55:59] Player fathan12 not found in top_gamer 
+[14:55:59] Player grebelin not found in top_gamer 
+[14:56:04] Player tirlen55 not found in top_gamer 
+[14:56:04] Player xolyn12 not found in top_gamer 
+[14:56:04] Player jolran13 not found in top_gamer 
+[14:56:05] Player zonix82 not found in top_gamer 
+[14:56:05] Player vixan88 not found in top_gamer 
+[14:56:05] Player lynkar72 not found in top_gamer 
+[14:56:05] Player zavon77 not found in top_gamer 
+[14:56:05] Player talon22 not found in top_gamer 
+[14:56:05] Player kavin68 not found in top_gamer 
+[14:56:06] Player grylon94 not found in top_gamer 
+[14:56:06] Player zyrok15 not found in top_gamer 
+[14:56:06] Player baxyn47 not found in top_gamer 
+[14:56:07] Player xavol61 not found in top_gamer 
+[14:56:07] Player talyra33 not found in top_gamer 
+[14:56:07] Player fexon91 not found in top_gamer 
+[14:56:07] Player kernix44 not found in top_gamer 
+[14:56:08] Player alora99 not found in top_gamer 
+[14:56:08] Player vyxor24 not found in top_gamer 
+[14:56:08] Player korun22 not found in top_gamer 
+[14:56:09] Player corlin49 not found in top_gamer 
+[14:56:09] Player jivon76 not found in top_gamer 
+[14:56:09] Player ferin28 not found in top_gamer 
+[14:56:09] Player falyn69 not found in top_gamer 
+[14:56:09] Player kioran26 not found in top_gamer 
+[14:56:09] Player tyrin57 not found in top_gamer 
+[14:56:10] Player virok28 not found in top_gamer 
+[14:56:10] Player lynar89 not found in top_gamer 
+[14:56:10] Player kylar39 not found in top_gamer 
+[14:56:10] Player maron51 not found in top_gamer 
+[14:56:10] Player tormik23 not found in top_gamer 
+[14:56:10] Player talvyn11 not found in top_gamer 
+[14:56:10] Player varos12 not found in top_gamer 
+[14:56:11] Player zyther33 not found in top_gamer 
+[14:56:11] Player valos69 not found in top_gamer 
+[14:56:11] Player torvix45 not found in top_gamer 
+[14:56:11] Player kriva89 not found in top_gamer 
+[14:56:11] Player tirael22 not found in top_gamer 
+[14:56:11] Player lyvin30 not found in top_gamer 
+[14:56:12] Player mavon66 not found in top_gamer 
+[14:56:12] Player xylog23 not found in top_gamer 
+[14:56:12] Player tiryn88 not found in top_gamer 
+[14:56:12] Player vorlan67 not found in top_gamer 
+[14:56:12] Player zerith44 not found in top_gamer 
+[14:56:12] Player lorvex81 not found in top_gamer 
+[14:56:12] Player meltra47 not found in top_gamer 
+[14:56:13] Player rynor30 not found in top_gamer 
+[14:56:13] Player feryn62 not found in top_gamer 
+--Test 3 --
+[14:58:27] Player abangku999 not found in top_league di row 31 
+[14:58:35] Player abuy not found in top_league di row 65 
+[14:58:58] Player tirlen55 not found in top_league di row 166 
+[14:59:18] Player albinoinova not found in top_league di row 250 
+[14:59:22] Player aldrian1507 not found in top_league di row 265 
+[14:59:24] Player xolyn12 not found in top_league di row 276 
+[14:59:27] Player alfiannurr not found in top_league di row 289 
+[14:59:49] Player ancik194 not found in top_league di row 381 
+[14:59:50] Player jolran13 not found in top_league di row 384 
+[15:00:01] Player anita28 not found in top_league di row 430 
+[15:00:09] Player apr-42 not found in top_league di row 461 
+[15:00:09] Player apr-77 not found in top_league di row 462 
+[15:00:37] Player asgo666 not found in top_league di row 579 
+[15:00:54] Player ayolah69 not found in top_league di row 650 
+[15:01:16] Player bandit2291 not found in top_league di row 749 
+[15:01:35] Player bedugzt04 not found in top_league di row 842 
+[15:01:37] Player zonix82 not found in top_league di row 852 
+[15:01:47] Player bey2109 not found in top_league di row 889 
+[15:02:04] Player vixan88 not found in top_league di row 960 
+[15:02:19] Player botoll12 not found in top_league di row 1023 
+[15:02:22] Player braders not found in top_league di row 1037 
+[15:02:24] Player brewekjos not found in top_league di row 1045 
+[15:09:52] Player abangku999 not found in top_league di row 2 
+[15:09:53] Player abuy not found in top_league di row 3 
+[15:09:53] Player tirlen55 not found in top_league di row 4 
+[15:09:53] Player albinoinova not found in top_league di row 5 
+[15:09:53] Player aldrian1507 not found in top_league di row 6 
+[15:11:18] Player abangku999 not found in top_league di row 2 
+[15:11:18] Player abuy not found in top_league di row 3 
+[15:11:19] Player tirlen55 not found in top_league di row 4 
+[15:11:19] Player albinoinova not found in top_league di row 5 
+[15:11:19] Player aldrian1507 not found in top_league di row 6 
+[15:12:40] Player abangku999 not found in top_league di row 31 
+[15:12:48] Player abuy not found in top_league di row 65 
+[15:14:21] Player apr-42 not found in top_league di row 461 
+[15:14:21] Player apr-77 not found in top_league di row 462 
+[15:36:01] Player apr-77 not found in top_gamer 
+[15:41:22] Player apr-42 not found in top_gamer 
+[16:15:30] Player jul77 not found in top_league di row 2441 
+[16:30:24] Player jul77 not found in top_gamer 
+[16:47:14] Player jul77 not found in top_league di row 2441 
+[17:01:46] Player jul77 not found in top_gamer 
+[17:10:32] Player apr-42 not found in top_league di row 461 
+[17:10:33] Player apr-77 not found in top_league di row 462 
+[17:31:45] Player apr-77 not found in top_gamer 
+[17:37:41] Player apr-42 not found in top_gamer 
+[19:25:44] Player apr-42 not found in top_league di row 461 
+[19:25:44] Player apr-77 not found in top_league di row 462 
+[19:48:09] Player apr-77 not found in top_gamer 
+[19:53:54] Player apr-42 not found in top_gamer 

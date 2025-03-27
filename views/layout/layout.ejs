@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>VKM Panel</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link href="img/favicon.ico" rel="icon">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <!-- Date time Picker -->
+    <link rel="stylesheet" type="text/css" href="plugins/datetimepicker/jquery.datetimepicker.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"
+        integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" defer>
+        </script>
+    <style>
+        .loader-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dots {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            animation: blink 1.4s infinite;
+        }
+
+        .dots:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dots:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes blink {
+
+            0%,
+            80%,
+            100% {
+                opacity: 0.2;
+            }
+
+            40% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <div id="spinner"
+            class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="/" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-house me-2"></i>VKM Panel</h3>
+                </a>
+                <div class="navbar-nav w-100">
+                    <a href="/" class="nav-item nav-link <%= active == 0 && open == 0 ? 'active': '' %>"><i
+                            class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <% menu.forEach(menuItem=> { %>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link <%= open == menuItem.ID ? 'active': '' %>" data-bs-toggle="dropdown"
+                                style="cursor: pointer;">
+                                <i class="<%= menuItem.Icon %>"></i>
+                                <%= menuItem.Menu %>
+                            </a>
+                            <div class="dropdown-menu bg-transparent border-0 <%= open == menuItem.ID ? 'show': '' %>">
+                                <% menuItem.submenu.forEach(submenuItem=> { %>
+                                    <a href="<%= submenuItem.Url %>"
+                                        class="dropdown-item <%= active==submenuItem.ID ? 'active' : '' %>">
+                                        <div class="d-flex justify-content-between">
+                                            <%= submenuItem.Submenu %>
+                                                <span class="badge text-bg-danger"
+                                                    id="badge<%=submenuItem.Submenu.split(' ').join('-')  %>"
+                                                    style="display: none;">0</span>
+                                                <div class="loader-menu" style="display: none;"
+                                                    id="dots<%=submenuItem.Submenu.split(' ').join('-')  %>">
+                                                    <div class="dots"></div>
+                                                </div>
+                                        </div>
+                                    </a>
+                                    <% }) %>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </nav>
+        </div>
+        <div class="content">
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="/" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars text-primary"></i>
+                </a>
+                <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <strong class="d-none d-lg-inline-flex">
+                                <%= session.Username %>
+                            </strong>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="" id="changePassword" class="dropdown-item">Change Password</a>
+                            <a href="/logout" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="container-fluid pt-2 px-2 mb-5" style="height: 100%;">
+                <%- body %>
+                    <div id="layoutModal" style="display: none;"></div>
+            </div>
+            <div class="container-fluid fixed-bottom pt-2 px-2 mt-5">
+                <div class="bg-secondary rounded p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            &copy; <a href="/">WPROJECT <%= version %></a>, All Right Reserved.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.6.0/dist/autoNumeric.min.js"></script>
+    <!-- Date time Picker -->
+    <script src="plugins/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        let sockets = io.connect('<%= SocketIO %>');
+        sockets.on("connect", () => {
+            console.log("Connected to server");
+        });
+        sockets.on("send-notification", () => {
+            let notifSound = new Audio('sounds/Notif-WDCoin.mp3')
+            notifSound.play()
+            console.log("Notification received");
+        });
+
+
+        // setTimeout(function () {
+        //     var alert = $(".alert");
+        //     if (alert.length) {
+        //         alert.fadeOut(1500, function () {
+        //             $(this).remove();
+        //         });
+        //     }
+        // }, 3000);
+        $("#changePassword").on('click', function (e) {
+            e.preventDefault()
+            $.ajax({
+                url: '/getChangePassword',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    _csrf: '<%= csrfToken %>',
+                },
+                beforeSend: function () { },
+                success: function (response) {
+                    $("#layoutModal").html(response.view).show()
+                    $("#changePasswordModal").modal('show')
+                },
+                error: function (a, b, c) { alert(c) }
+            })
+        })
+
+        $(document).ready(function () {
+            checkPendingWD()
+            checkWager()
+            setInterval(() => {
+                checkPendingWD()
+                checkWager()
+            }, 10000);
+        })
+    </script>
+    <script async>
+        function checkPendingWD() {
+            $.ajax({
+                url: '/getPendingWD',
+                type: 'post',
+                dataType: 'json',
+                success: function (response) {
+                    if (response.result > 0) {
+                        $("#badge" + response.menu.split(' ').join('-')).text(response.result).show()
+                        // $("#badge" + response.menu.split(' ').join('-')).html("<span class='badge bg-danger'> Loading...</span>").show()
+                    } else {
+                        $("#badge" + response.menu.split(' ').join('-')).text(response.result).hide()
+                    }
+                },
+                error: function (a, b, c) {
+                    alert(c)
+                }
+            })
+        }
+    </script>
+    <script async>
+        function checkWager() {
+            $.ajax({
+                url: '/getPendingWager',
+                type: 'post',
+                dataType: 'json',
+                success: function (response) {
+                    if (response.result > 0) {
+                        $("#dots" + response.menu.split(' ').join('-')).show()
+                    } else {
+                        $("#dots" + response.menu.split(' ').join('-')).hide()
+                    }
+                },
+                error: function (a, b, c) {
+                    alert(c)
+                }
+            })
+        }
+    </script>
+    <%- scripts || '' %>
+</body>
+
+</html>

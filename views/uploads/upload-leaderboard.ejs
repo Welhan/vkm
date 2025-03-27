@@ -1,0 +1,350 @@
+<div class="card bg-secondary text-white">
+    <div class="card-header bg-primary">
+        <div class="d-flex justify-content-between">
+            <div>
+                Upload Leaderboard Rank
+                <input type="hidden" name="csrf" id="csrf" value="<%= csrfToken %>">
+            </div>
+            <div>
+                <a href="/getTemplate" class="btn btn-dark btn-sm" id="btnTemplateLeaderboard">Template Upload
+                </a>
+                <button type="button" class="btn btn-dark btn-sm" id="btnUploadLeaderboard">Upload
+                    XLSX</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body bg-white text-black">
+        <% if (successMessage && successMessage[0] !=undefined ) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>
+                <%= successMessage[0] %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
+                <% if (errorMessage && errorMessage[0] !=undefined ) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i>
+                        <%= errorMessage[0] %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <% } %>
+                        <% if(!bracket){ %>
+                            <div class="alert alert-danger" role="alert">
+                                Bracket Link Belum Terdaftar
+                            </div>
+                            <% } %>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <button type="button" class="btn btn-primary" id="btnTop50">Top Wager</button>
+                                        <button type="button" class="btn btn-primary" id="btnTopSlot">Top Slot</button>
+                                        <button type="button" class="btn btn-primary" id="btnTopCasino">Top
+                                            Casino</button>
+                                        <button type="button" class="btn btn-primary" id="btnTopWD">Top WD</button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-primary" id="btnDownloadTop200" href="/getDataTop200">Download
+                                            Top
+                                            200</a>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="data mt-3">
+                                    <div class="card-body" id="cardData">
+                                        <div id="loader">
+                                            <div class="d-flex justify-content-center">
+                                                <div class="spinner-border text-primary" role="status">
+                                                    <span class="visually-hidden">Loading...</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="dataTop"></div>
+                                    </div>
+                                </div>
+    </div>
+</div>
+<div class="modal fade text-white" id="uploadXslxModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-secondary">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload XLSX</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="formUpload" method="post" action="/upload-xslx-process-leads" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <% if(!bracket){ %>
+                        <div class="alert alert-danger" role="alert">
+                            Bracket Link Belum Terdaftar
+                        </div>
+                        <% } %>
+                            <div class="row" id="uploadField">
+                                <div class="col">
+                                    <label for="">Upload XSLX</label>
+                                    <input type="file" name="xslx" id="xslx" class="form-control" required>
+                                    <div class="invalid-feedback" id="errXslx"></div>
+                                </div>
+                            </div>
+                </div>
+                <div class="modal-footer">
+                    <% if(bracket){ %>
+                        <button type="submit" class="btn btn-primary" id="btnUpload">Upload</button>
+                        <% } %>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="progressModal" tabindex="-1" aria-labelledby="NewModal" data-bs-backdrop="static"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-secondary">
+            <div class="modal-header">
+                <h5 class="modal-title" id="NewModal">Uploading File</h5>
+            </div>
+            <div class="modal-body">
+                Uploading...
+                <div class="progress mb-3" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%">
+                    </div>
+                </div>
+                <div class="dataNotFound" style="display: none;">
+                    <div class="table-responsive bg-white">
+                        <table class="table table-stripped compact" id="tableNotFound" width="100%">
+                            <thead>
+                                <th>No</th>
+                                <th>Player</th>
+                                <th>Status</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: none;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnClose">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="viewModal" style="display: none;"></div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"
+    integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<% scripts=` %>
+    <script>
+
+        function top200() {
+            $.ajax({
+                url: '/getDataTop200',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    _csrf: $("#csrf").val(),
+                },
+                beforeSend: function () {
+                    $("#loader").show()
+                },
+                success: function (response) {
+                    $("#loader").hide()
+                    // $("#dataTop").html(response.view)
+                },
+                error: function (a, b, c) {
+                    alert(c)
+                }
+            })
+        }
+
+        function top50() {
+            $.ajax({
+                url: '/getDataTop50',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    _csrf: $("#csrf").val(),
+                },
+                beforeSend: function () {
+                    $("#loader").show()
+                    $("#btnTop50").focus()
+                },
+                success: function (response) {
+                    $("#loader").hide()
+                    $("#dataTop").html(response.view)
+                },
+                error: function (a, b, c) {
+                    alert(c)
+                }
+            })
+        }
+
+        $("#btnTop50").on('click', function (e) {
+            $("#dataTop").empty()
+            e.preventDefault()
+            top50()
+        })
+
+        $("#btnTopSlot").on('click', function (e) {
+            $("#dataTop").empty()
+            dataTable.ajax.reload();
+            e.preventDefault()
+            $.ajax({
+                url: '/getDataTopSlot',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    _csrf: $("#csrf").val(),
+                },
+                beforeSend: function () {
+                    $("#loader").show()
+                },
+                success: function (response) {
+                    $("#loader").hide()
+                    $("#dataTop").html(response.view)
+                },
+                error: function (a, b, c) {
+                    alert(c)
+                }
+            })
+        })
+
+        $("#btnTopCasino").on('click', function (e) {
+            $("#dataTop").empty()
+            e.preventDefault()
+            $.ajax({
+                url: '/getDataTopCasino',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    _csrf: $("#csrf").val(),
+                },
+                beforeSend: function () {
+                    $("#loader").show()
+                },
+                success: function (response) {
+                    $("#loader").hide()
+                    $("#dataTop").html(response.view)
+                },
+                error: function (a, b, c) {
+                    alert(c)
+                }
+            })
+        })
+
+        $("#btnTopWD").on('click', function (e) {
+            $("#dataTop").empty()
+            e.preventDefault()
+            $.ajax({
+                url: '/getDataTopWD',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    _csrf: $("#csrf").val(),
+                },
+                beforeSend: function () {
+                    $("#loader").show()
+                },
+                success: function (response) {
+                    $("#loader").hide()
+                    $("#dataTop").html(response.view)
+                },
+                error: function (a, b, c) {
+                    alert(c)
+                }
+            })
+        })
+
+        let intervalID;
+        let isUploading = false;
+        function checkUploadingStatus(uploading) {
+            if (!uploading) {
+                return;
+            } else {
+                progressUpload()
+            }
+        }
+        function progressUpload() {
+            $.ajax({
+                url: '/getUploadLeadsProcess',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    _csrf: $("#csrf").val()
+                },
+                success: function (response) {
+                    if (response.progress) { }
+                    let progress = response.progress * 100;
+                    if (progress != 100) {
+                        if (response.errMsg.length > 0) {
+                            $(".modal-dialog").addClass('modal-lg');
+                            let table = $('#tableNotFound').DataTable();
+
+                            // Jika DataTable belum diinisialisasi, inisialisasi terlebih dahulu
+                            if (!$.fn.DataTable.isDataTable('#tableNotFound')) {
+                                table = $('#tableNotFound').DataTable({
+                                    responsive: true,
+                                    autoWidth: false
+                                });
+                            }
+
+                            let existingPlayers = new Set(); // Set untuk menyimpan player unik
+
+                            // Ambil semua player yang sudah ada di DataTable
+                            table.rows().every(function () {
+                                let data = this.data();
+                                existingPlayers.add(data[1]); // Index 1 adalah kolom "player"
+                            });
+
+                            let no = table.rows().count() + 1; // Nomor urut
+
+                            response.errMsg.forEach((err) => {
+                                if (err.player && !existingPlayers.has(err.player)) {
+                                    existingPlayers.add(err.player); // Tambahkan ke set agar tidak duplikat
+
+                                    // Insert data baru ke dalam DataTable tanpa refresh
+                                    table.row.add([
+                                        no++,         // Nomor urut
+                                        err.player,   // Nama pemain
+                                        err.message   // Pesan error
+                                    ]).draw(false);
+                                }
+                            });
+
+                            $('.dataNotFound').show();
+                        }
+
+
+                        $('#uploadXslxModal').modal('hide');
+                        $('#progressModal').modal('show');
+                        $('.progress-bar').css('width', progress + '%').text(progress.toFixed(2) + '%');
+                        isUploading = true;
+                    } else {
+                        $('.modal-footer').show();
+                        $('.progress-bar').css('width', progress + '%').text(progress.toFixed(2) + '%');
+                        clearInterval(intervalID);
+                        isUploading = false;
+                    }
+
+                    checkUploadingStatus(isUploading);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        $('#btnClose').click(function (e) {
+            window.location.reload()
+            clearInterval(intervalID);
+        })
+
+        $(document).ready(function () {
+
+            progressUpload();
+            top50()
+        });
+        $("#btnUploadLeaderboard").on('click', function (e) {
+            e.preventDefault()
+            $("#uploadXslxModal").modal('show')
+        })
+    </script>
+    <% ` %>

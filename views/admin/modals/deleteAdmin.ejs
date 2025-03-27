@@ -1,0 +1,59 @@
+<div class="modal fade" id="deleteAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-secondary">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Admin</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="deleteForm">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <input type="hidden" name="ID" id="ID" value="<%= data.ID %>" readonly>
+                            <label for="">Username</label>
+                            <input type="text" name="Username" id="Username" class="form-control"
+                                value="<%= data.Username %>" readonly>
+                        </div>
+                        <div class="col">
+                            <label for="">Email</label>
+                            <input type="text" name="Email" id="Email" class="form-control" value="<%= data.Email %>"
+                                readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(".deleteForm").on('submit', function (e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/deleteAdmin',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                _csrf: $("#csrfToken").val(),
+                Username: $("#Username").val(),
+                ID: $("#ID").val(),
+            },
+            beforeSend: function () {
+                $('#btnSubmit').attr('disabled', 'disabled')
+            },
+            success: function (response) {
+                $('#btnSubmit').removeAttr('disabled')
+                if (response.logout) {
+                    window.location.href = response.logout
+                } else {
+                    window.location.reload()
+                }
+            },
+            error: function (a, b, c) {
+                alert(c)
+            }
+        })
+    })
+</script>

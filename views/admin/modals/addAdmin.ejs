@@ -1,0 +1,158 @@
+<div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-secondary">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New Admin</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="formSubmit">
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="">Username</label>
+                            <input type="text" name="Username" id="Username" class="form-control">
+                            <div id="errUsername" class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="">Email</label>
+                            <input type="hidden" name="UserID" id="UserID">
+                            <select id="Email" style="width: 100%;" name="Email" class="form-control"></select>
+                            <div id="errEmail" class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="">Password</label>
+                            <div class="input-group">
+                                <input type="password" name="Password" id="Password" class="form-control" readonly>
+                                <button type="button" id="generatePassword" class="btn btn-primary">Generate</button>
+                                <button type="button" id="copyPassword" class="btn btn-warning">Copy</button>
+                                <div id="errPassword" class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" class="btnSubmit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function generateRandomPassword(length) {
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+        let password = "";
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length);
+            password += charset[randomIndex];
+        }
+        return password;
+    }
+
+    $('#generatePassword').on('click', function () {
+        const newPassword = generateRandomPassword(12);
+        $('#Password').val(newPassword);
+    });
+
+    $('#copyPassword').on('click', function () {
+        const passwordField = document.getElementById('Password');
+        if (passwordField.value) {
+            passwordField.select();
+            passwordField.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(passwordField.value).then(function () {
+                alert('Password copied to clipboard!');
+            }).catch(function () {
+                alert('Failed to copy password. Please try again.');
+            });
+        } else {
+            alert('No password to copy!');
+        }
+    });
+
+    $(".formSubmit").on('submit', function (e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/addAdmin',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                _csrf: $("#csrfToken").val(),
+                Username: $("#Username").val(),
+                Email: $("#Email").val(),
+                Password: $("#Password").val(),
+                UserID: $("#UserID").val(),
+            },
+            beforeSend: function () {
+                $('#btnSubmit').attr('disabled', 'disabled')
+            },
+            success: function (response) {
+                $('#btnSubmit').removeAttr('disabled')
+                $('#btnSubmit').removeAttr('disabled')
+                if (response.logout) {
+                    window.location.href = response.logout
+                } else {
+                    if (response.error) {
+                        if (response.error.Username) {
+                            $("#Username").addClass('is-invalid')
+                            $("#errUsername").html(response.error.Username)
+                        } else {
+                            $("#Username").removeClass('is-invalid')
+                            $("#errUsername").html('')
+                        }
+                        if (response.error.Email) {
+                            $("#Email").addClass('is-invalid')
+                            $("#errEmail").html(response.error.Email)
+                        } else {
+                            $("#Email").removeClass('is-invalid')
+                            $("#errEmail").html('')
+                        }
+                        if (response.error.Password) {
+                            $("#Password").addClass('is-invalid')
+                            $("#errPassword").html(response.error.Password)
+                        } else {
+                            $("#Password").removeClass('is-invalid')
+                            $("#errPassword").html('')
+                        }
+                    } else {
+                        window.location.reload()
+                    }
+                }
+            },
+            error: function (a, b, c) {
+                alert(c)
+            }
+        })
+    })
+    $('#Email').select2({
+        placeholder: 'Type for searching...',
+        ajax: {
+            url: '/checkEmail',
+            dataType: 'json',
+            type: 'post',
+            delay: 250,
+            data: function (params) {
+                return {
+                    _csrf: $("#csrfToken").val(),
+                    Email: params.term
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data.map(function (item) {
+                        $("#UserID").val(item.id)
+                        return {
+                            id: item.text,
+                            text: item.text
+                        };
+                    })
+                };
+            },
+            cache: true
+        },
+        minimumInputLength: 5,
+        dropdownParent: $('#addAdminModal')
+    });
+</script>

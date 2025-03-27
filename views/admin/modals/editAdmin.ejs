@@ -1,0 +1,71 @@
+<div class="modal fade" id="editAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-secondary">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Admin</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="editForm">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <input type="hidden" name="ID" id="ID" value="<%= data.ID %>" readonly>
+                            <label for="">Username</label>
+                            <input type="text" name="Username" id="Username" class="form-control"
+                                value="<%= data.Username %>">
+                            <div id="errUsername" class="invalid-feedback"></div>
+                        </div>
+                        <div class="col">
+                            <label for="">Email</label>
+                            <input type="text" name="Email" id="Email" class="form-control" value="<%= data.Email %>"
+                                readonly>
+                            <div id="errEmail" class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(".editForm").on('submit', function (e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/editAdmin',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                _csrf: $("#csrfToken").val(),
+                Username: $("#Username").val(),
+                ID: $("#ID").val(),
+            },
+            beforeSend: function () {
+                $('#btnSubmit').attr('disabled', 'disabled')
+            },
+            success: function (response) {
+                $('#btnSubmit').removeAttr('disabled')
+                if (response.logout) {
+                    window.location.href = response.logout
+                } else {
+                    if (response.error) {
+                        if (response.error.Username) {
+                            $("#Username").addClass('is-invalid')
+                            $("#errUsername").html(response.error.Username)
+                        } else {
+                            $("#Username").removeClass('is-invalid')
+                            $("#errUsername").html('')
+                        }
+                    } else {
+                        window.location.reload()
+                    }
+                }
+            },
+            error: function (a, b, c) {
+                alert(c)
+            }
+        })
+    })
+</script>

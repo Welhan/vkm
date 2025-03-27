@@ -1,0 +1,86 @@
+<div class="table-responsive">
+    <form class="formFilter">
+        <div class="row">
+            <div class="col">
+                <label for="">League</label>
+                <select name="Loyalty" id="Loyalty" class="form-select">
+                    <option value="Bronze">Bronze</option>
+                    <option value="Silver">Silver</option>
+                    <option value="Gold">Gold</option>
+                    <option value="Platinum">Platinum</option>
+                    <option value="Diamond">Diamond</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <br>
+                <button class="btn btn-primary" id="btnFilter" type="button">Filter</button>
+            </div>
+        </div>
+    </form>
+    <input type="hidden" id="csrfToken" class="csrfToken" value="<%= csrfToken %>">
+    <table class="table" id="tableTop50">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Turnover</th>
+            </tr>
+        </thead>
+        <tbody id="data"></tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        dataTop50();
+    });
+
+    $("#btnFilter").on('click', function (e) {
+        let Loyalty = $("#Loyalty").val()
+        dataTop50(Loyalty)
+    })
+    dataTable = null;
+
+    function dataTop50(Loyalty = 'Bronze') {
+        if (dataTable !== null) {
+            dataTable.destroy();
+        }
+
+        dataTable = $('#tableTop50').DataTable({
+            "order": [[0, 'asc']],
+            "searching": false,
+            "ordering": false,
+            "ajax": {
+                "url": "/dataTop50",
+                "dataType": "json",
+                "type": 'post',
+                "data": {
+                    _csrf: $("#csrfToken").val(),
+                    Loyalty
+                },
+                "dataSrc": function (data) {
+                    let res = [];
+                    for (let i = 0; i < data.data.length; i++) {
+                        let row = data.data[i];
+                        let rowData = {
+                            "CurrentPlacement": row.CurrentPlacement,
+                            "Username": row.Username,
+                            "Turnover": row.Turnover,
+                        };
+                        res.push(rowData);
+                    }
+                    return res;
+                }
+            },
+            "columns": [
+                { "data": "CurrentPlacement" },
+                { "data": "Username" },
+                {
+                    "data": "Turnover",
+                    "render": function (data, type, row) {
+                        return data.toLocaleString('ID-id')
+                    }
+                },
+            ]
+        });
+    }
+</script>

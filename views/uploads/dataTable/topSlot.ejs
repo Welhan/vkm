@@ -1,0 +1,61 @@
+<div class="table-responsive">
+    <input type="hidden" id="csrfToken" class="csrfToken" value="<%= csrfToken %>">
+    <table class="table" id="tableTopSlot">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Turnover</th>
+            </tr>
+        </thead>
+        <tbody id="data"></tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        dataTopSlot();
+    });
+    dataTable = null;
+
+    function dataTopSlot() {
+        if (dataTable !== null) {
+            dataTable.destroy();
+        }
+        dataTable = $('#tableTopSlot').DataTable({
+            "order": [[0, 'asc']],
+            "searching": false,
+            "ordering": false,
+            "ajax": {
+                "url": "/dataTopSlot",
+                "dataType": "json",
+                "type": 'post',
+                "data": {
+                    _csrf: $("#csrfToken").val()
+                },
+                "dataSrc": function (data) {
+                    let res = [];
+                    for (let i = 0; i < data.data.length; i++) {
+                        let row = data.data[i];
+                        let rowData = {
+                            "CurrentPlacement": row.CurrentPlacement,
+                            "Username": row.Username,
+                            "Turnover": row.Turnover,
+                        };
+                        res.push(rowData);
+                    }
+                    return res;
+                }
+            },
+            "columns": [
+                { "data": "CurrentPlacement" },
+                { "data": "Username" },
+                {
+                    "data": "Turnover",
+                    "render": function (data, type, row) {
+                        return data.toLocaleString('ID-id')
+                    }
+                },
+            ]
+        });
+    }
+</script>

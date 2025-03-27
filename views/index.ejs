@@ -1,0 +1,226 @@
+<div class="container-fluid pt-4 px-4">
+    <% if (successMessage && successMessage[0] !=undefined ) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fa fa-exclamation-circle me-2"></i>
+            <%= successMessage[0] %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+            <% if (errorMessage && errorMessage[0] !=undefined ) { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fa fa-exclamation-circle me-2"></i>
+                    <%= errorMessage[0] %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% } %>
+                    <div class="row g-4">
+                        <% if(otpAccess) {%>
+                            <div class="col-sm-6 col-xl-3">
+                                <div
+                                    class="bg-secondary rounded d-flex align-items-center justify-content-between text-center p-4">
+                                    <div class="row d-flex">
+                                        <b class="mb-2 text-center">WhatsApp OTP</b>
+                                        <div class="card-body client-24-1" id="scan">
+                                            <div class="countdown-24-1">
+                                            </div>
+                                            <div class="countdownqrcode-24-1">
+                                            </div>
+                                            <div class="position-relative">
+                                                <div class="spinner-border text-primary" role="status"
+                                                    id="loadingSpinner-1">
+                                                </div>
+                                                <br>
+                                                <span class="text-primary ms-2" id="loadingText-1">Mohon
+                                                    tunggu</span>
+                                                <img class="client-24-1" src="" alt="QR Code" id="qrcode"
+                                                    style="height: 100%; width: 100%; object-fit: contain; display: none" />
+                                            </div>
+                                        </div>
+                                        <div class="client-24-1" id="info">
+                                        </div>
+                                        <div class="card-footer text-muted">
+                                            <button type="button" class="btn btn-primary" id="btnConnect-24-1">Generate
+                                                QR Code</button>
+                                            <button type="button" class="btn btn-danger"
+                                                id="btnDisconnect-24-1">Disconnect</button>
+                                            <button class="btn btn-info" style="display: none;"
+                                                id="btnDisconnecting-24-1">Disconnecting...</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%}%>
+                                <% if(levelAccess) {%>
+                                    <div class="col-sm-6 col-xl-3" style="cursor: pointer;"
+                                        onclick="window.location.href='/levelUp'">
+                                        <div
+                                            class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                                            <div class="ms-3">
+                                                <p class="mb-2">Level Up</p>
+                                                <h6 class="mb-0">
+                                                    <%= levelUp %> Player
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                        <!-- <div class="col-sm-6 col-xl-3">
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-chart-area fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Today Revenue</p>
+                    <h6 class="mb-0">$1234</h6>
+                </div>
+            </div>
+        </div> -->
+                                        <!-- <div class="col-sm-6 col-xl-3">
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Total Revenue</p>
+                    <h6 class="mb-0">$1234</h6>
+                </div>
+            </div>
+        </div> -->
+                    </div>
+</div>
+<% scripts=`%>
+    <% ` %>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"
+            integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            let socket = io.connect('<%= constants.otp_url %>');
+            let displayedOrderNumbers = [];
+
+            function getDetail(userID = 24, orderno = 1) {
+                if (displayedOrderNumbers.includes(orderno)) {
+                    return;
+                }
+                $.ajax({
+                    url: "/getDetailOTP",
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        _csrf: '<%= csrfToken %>',
+                        userID: 24,
+                        orderno: 1
+                    },
+                    success: function (response) {
+                        if (response.Username == undefined || response.Phone == undefined) {
+                            return getDetail(userID = 24, orderno = 1)
+                        } else {
+                            $('.client-' + userID + "-" + orderno + '#info').append(`<label>Username: ${response.Username}</label><br>`);
+                            $('.client-' + userID + "-" + orderno + '#info').append(`<label>Phone: ${response.Phone}</label>`);
+                        }
+                        displayedOrderNumbers.push(orderno);
+                    },
+                    error: function (xhr, status, error) {
+                    }
+                });
+            }
+            $(document).ready(function () {
+                $("#btnField").show()
+                let isWaiting = true
+                socket.on('qr', function (datasocket) {
+                    if (datasocket.src) {
+                        $('#loadingSpinner-' + 1).hide();
+                        $('#loadingText-' + 1).hide();
+                        $('.client-24-1#qrcode').attr('src', datasocket.src).show()
+                        let countdown = 30;
+                        let countdownInterval = setInterval(() => {
+                            countdown--;
+                            let countdownElement = $('.countdown-24-1');
+                            countdownElement.text('Masa berlaku QR Code tersisa : ' + countdown + ' detik');
+                            if (countdown <= 0) {
+                                $('.client-24-1#qrcode').attr('src', datasocket.src).hide()
+                                countdownElement.text('');
+                                clearInterval(countdownInterval);
+                                if ($(`#btnDisconnect-24-1`).is(':hidden')) {
+                                    let time = 15;
+                                    let timeInterval = setInterval(() => {
+                                        time--;
+                                        let timeQrRequesting = $('.countdownqrcode-24-1');
+                                        timeQrRequesting.text('QR Code dapat di-generate lagi setelah ' + time + ' detik');
+                                        if (time <= 0) {
+                                            timeQrRequesting.text('');
+                                            clearInterval(timeInterval);
+                                        }
+                                    }, 1000)
+                                }
+                            }
+                        }, 1000);
+                    }
+                    else {
+                        $(`.client-24-1#scan`).hide();
+                        $(`.client-24-1#info`).hide();
+                        $(`#btnConnect-24-1`).show();
+                        $(`#btnDisconnect-24-1`).hide();
+                    }
+                    $(`#btnDisconnecting-24-1`).hide()
+                });
+
+                socket.on('ready', function (datasocket) {
+                    getDetail(24, 1)
+                    $('.client-24-1#scan').hide();
+                    $('.client-24-1#info').show();
+                    $('#btnConnect-24-1').hide();
+                    $('#btnDisconnect-24-1').show();
+                    $("#btnDisconnecting-24-1").hide()
+                });
+                socket.on('send-notification', function (datasocket) {
+                    if (datasocket.id == 24) {
+                        new Audio('sounds/sound10sec.mp3').play();
+                    }
+                })
+                socket.on('statusWA', function (datasocket) {
+                    getDetail(24, 1);
+                    if (datasocket.id == 24) {
+                        if (datasocket.text == "ONLINE") {
+                            $(`.client-24-1#scan`).hide();
+                            $(`.client-24-1#info`).show();
+                            $(`#btnConnect-24-1`).hide();
+                            $(`#btnDisconnect-24-1`).show();
+                        } else if (datasocket.text == "OFFLINE") {
+                            $(`.client-24-1#scan`).hide();
+                            $(`.client-24-1#info`).hide();
+                            $(`#btnConnect-24-1`).show();
+                            $(`#btnDisconnect-24-1`).hide();
+                        }
+                    }
+                    $(`#btnDisconnecting-24-1`).hide()
+                });
+                socket.emit('cek-status', {
+                    id: 24,
+                    orderno: 1
+                });
+                $(`#btnDisconnecting-24-1`).hide()
+                for (let i = 1; i <= 1; i++) {
+                    $(`#btnConnect-24-` + 1).click(function () {
+                        $('#loadingSpinner-1').show()
+                        $('#loadingText-1').show()
+                        $(`.client-24-1#qrcode`).hide();
+                        $(`.client-24-1#scan`).show();
+                        $(`#btnConnect-24-1`).hide();
+                        $(`#btnDisconnect-24-1`).hide();
+
+                        socket.emit('client-connect', {
+                            id: 24,
+                            orderno: i
+                        });
+                        $(`#btnDisconnecting-24-1`).hide()
+                    })
+
+                    $(`#btnDisconnect-24-1`).click(function () {
+                        socket.emit('client-disconnect', {
+                            sender: 24,
+                            orderno: i
+                        });
+                        $(`#btnDisconnect-24-1`).hide()
+                        $(`#btnDisconnecting-24-1`).show()
+                    })
+                }
+            })
+        </script>

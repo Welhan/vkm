@@ -1,0 +1,76 @@
+<div class="modal fade" id="accessAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-secondary">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Access Admin</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="formSubmit">
+                <div class="modal-body bg-white">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <input type="hidden" name="csrfToken" id="csrfToken" value="<%= csrfToken %>">
+                            <thead>
+                                <th>Menu</th>
+                                <th>Akses</th>
+                            </thead>
+                            <tbody>
+                                <% data.menu.forEach(function (item, index) { %>
+                                    <tr class="bg-primary">
+                                        <td colspan="2" class="fw-bold text-white">
+                                            <%= item.Menu %>
+                                        </td>
+                                    </tr>
+                                    <% item.submenu.forEach(function (sub, idx) { %>
+                                        <tr>
+                                            <td>
+                                                <%= sub.Submenu %>
+                                            </td>
+                                            <td>
+                                                <span
+                                                    class="badge rounded-pill <%= sub.access ? 'text-bg-success' : 'text-bg-danger'%>"
+                                                    onclick="updateAccess(this,'<%= sub.ID %>', '<%= data.username %>', '<%= sub.access ? 1 : 0 %>')"
+                                                    style="cursor: pointer;">
+                                                    <%= sub.access ? 'On' : 'Off' %>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                            <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" class="btnSubmit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function updateAccess(el, ID, Username, View) {
+        $.ajax({
+            url: '/updateUserAccess',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                _csrf: $("#csrfToken").val(),
+                SubmenuID: ID,
+                Username
+            },
+            beforeSend: function () {
+                if (View == 1) {
+                    $(el).removeClass('text-bg-success').addClass('text-bg-danger').text('Off')
+                } else {
+                    $(el).removeClass('text-bg-danger').addClass('text-bg-success').text('On')
+                }
+            },
+            success: function (response) { },
+            error: function (a, b, c) {
+                alert(c)
+            }
+        })
+
+    }
+</script>
