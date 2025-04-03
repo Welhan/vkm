@@ -47,14 +47,14 @@ module.exports = {
     return await this.generateSubmenu(menuid);
   },
   generateMenu: async function (username = "") {
-    let query = `SELECT * FROM mst_menu WHERE Active = 1`;
+    let query = `SELECT * FROM mst_menu`;
 
     if (username) {
-      query = `SELECT DISTINCT A.ID, A.Menu, A.Icon
+      query = `SELECT DISTINCT A.id, A.menu, A.icon
         FROM mst_menu A
-        LEFT JOIN mst_submenu B ON B.MenuID = A.ID
-        RIGHT JOIN user_access_menu C ON A.ID = C.MenuID
-        WHERE A.Active = 1 AND C.Username = '${username}' AND C.View = 1`;
+        LEFT JOIN mst_sub_menu B ON B.menu_id = A.id
+        RIGHT JOIN user_access_menu C ON A.id = C.menu_id
+        WHERE B.active = 1 AND C.user_id = '${username}'`;
     }
     return (await this.doQuery(db, query)).results;
   },

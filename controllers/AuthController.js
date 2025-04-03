@@ -45,17 +45,15 @@ module.exports = {
     let checkUser = (
       await helpers.doQuery(
         db,
-        `SELECT ID, Username, Password, UserID, Email FROM admin WHERE Username = ?`,
+        `SELECT id, user_id, password FROM anggota WHERE user_id = ? AND active = 1`,
         [Username]
       )
     ).results;
     if (checkUser.length > 0) {
-      let thisMatch = await bcrypt.compare(Password, checkUser[0].Password);
+      let thisMatch = await bcrypt.compare(Password, checkUser[0].password);
       if (thisMatch) {
-        req.session.ID = checkUser[0].ID;
-        req.session.Username = checkUser[0].Username.toUpperCase();
-        req.session.UserID = checkUser[0].UserID;
-        req.session.Email = checkUser[0].Email;
+        req.session.ID = checkUser[0].id;
+        req.session.Username = checkUser[0].user_id.toUpperCase();
         req.flash("success", "Login berhasil");
         return res.json({ redirect: "/" });
       } else {
@@ -92,7 +90,6 @@ module.exports = {
     let NewPassword = req.body.NewPassword;
     let ConfirmPassword = req.body.ConfirmPassword;
     let Username = req.session.Username;
-    let Email = req.session.Email;
     let error = {};
     if (!CurrentPassword) {
       error.CurrentPassword = "Password saat ini wajib diisi";
@@ -112,8 +109,8 @@ module.exports = {
     let checkUser = (
       await helpers.doQuery(
         db,
-        `SELECT ID, Username, Password, UserID FROM admin WHERE Username = ? AND Email = ?`,
-        [Username, Email]
+        `SELECT id, user_id, password FROM anggota WHERE user_id = ? AND active = 1`,
+        [Username]
       )
     ).results;
     if (checkUser.length > 0) {
@@ -124,8 +121,8 @@ module.exports = {
       let Password = await bcrypt.hash(NewPassword, 10);
       if (thisMatch) {
         db.query(
-          `UPDATE admin SET Password = ? WHERE Username = ? AND Email = ?`,
-          [Password, Username, Email],
+          `UPDATE anggota SET password = ? WHERE user_id = ?`,
+          [Password, Username],
           function (err) {
             if (err) {
               req.flash("error", "Ganti password gagal!");
